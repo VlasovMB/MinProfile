@@ -58,11 +58,16 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User findByName(String username) {
         final SqlParameterSource namedParameters = new MapSqlParameterSource().addValue("username", username.toLowerCase());
-        User user = namedParameterJdbcTemplate
-                .queryForObject(
-                        "SELECT * FROM " + TABLE_NAME_USERS + " WHERE username = :username",
-                        namedParameters,
-                        getUserRowMapper());
+        User user;
+        try {
+            user = namedParameterJdbcTemplate
+                    .queryForObject(
+                            "SELECT * FROM " + TABLE_NAME_USERS + " WHERE username = :username",
+                            namedParameters,
+                            getUserRowMapper());
+        } catch (Exception ignored){
+            return null;
+        }
         return user;
     }
 

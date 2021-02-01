@@ -2,7 +2,9 @@ package ru.vlasovmb.minprofile.config;
 
 import org.h2.server.web.WebServlet;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+import ru.vlasovmb.minprofile.config.filter.Utf8Filter;
 
+import javax.servlet.Filter;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
@@ -13,6 +15,15 @@ public class WebAppInit extends AbstractAnnotationConfigDispatcherServletInitial
     @Override
     protected Class<?>[] getRootConfigClasses() {
         return new Class[]{PersistenceConfig.class, WebConfig.class};
+    }
+
+    /**
+     * Save russian chars to database
+     *
+     */
+    @Override
+    protected Filter[] getServletFilters() {
+        return new Filter[]{new Utf8Filter()};
     }
 
     /**

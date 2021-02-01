@@ -13,6 +13,7 @@ import ru.vlasovmb.minprofile.security.model.User;
 import ru.vlasovmb.minprofile.security.model.UserForm;
 import ru.vlasovmb.minprofile.security.service.SecurityService;
 import ru.vlasovmb.minprofile.security.service.UserService;
+import ru.vlasovmb.minprofile.security.validator.UserValidator;
 
 
 @Controller
@@ -21,14 +22,17 @@ public class AppController {
     private final SecurityService securityService;
     private final UserService userService;
     private final AccountService accountService;
+    private final UserValidator userValidator;
 
     @Autowired
     public AppController(SecurityService securityService,
                          UserService userService,
-                         AccountService accountService) {
+                         AccountService accountService,
+                         UserValidator userValidator) {
         this.securityService = securityService;
         this.userService = userService;
         this.accountService = accountService;
+        this.userValidator = userValidator;
     }
 
     @GetMapping("/registration")
@@ -39,6 +43,7 @@ public class AppController {
 
     @PostMapping("/registration")
     public String registration(@ModelAttribute("userForm") UserForm userForm, BindingResult bindingResult) {
+        userValidator.validate(userForm.getUser(), bindingResult);
         if (bindingResult.hasErrors()) {
             return "registration";
         }
@@ -47,10 +52,9 @@ public class AppController {
         userAccount.setUserId(newUser.getId());
         userAccount.setBalance(0.);
         accountService.save(userAccount);
-
         securityService.autoLogin(
                 newUser.getUsername(),
-                newUser.getPassword());
+                newUser.getPasswordConfirm());//password confirm raw, specially for autologin
         return "redirect:/balance";
 
     }
@@ -65,6 +69,7 @@ public class AppController {
 
 	@GetMapping("/login")
 	public String loginPage(Model model, String error, String logout)  {
+        if(!securityService.isAnonymousUser()) return "redirect:/balance";
         if (error !=null) {
             model.addAttribute("error", "Пользователь или пароль не верный");
         }
@@ -78,5 +83,10 @@ public class AppController {
 	@GetMapping("/")
     public String home(Model model){
         return "redirect:/balance";
+    }
+
+    @GetMapping("/error403")
+    public String error403(Model model){
+        return "error403";
     }
 }

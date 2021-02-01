@@ -16,13 +16,13 @@ import java.util.stream.StreamSupport;
 
 
 @Service
-public class UserDetailService implements UserDetailsService {
+public class UserDetailServiceImpl implements UserDetailsService {
 
     private final UserDao userDao;
     private final UserRolesDao userRolesDao;
 
     @Autowired
-    public UserDetailService(UserDao userDao, UserRolesDao userRolesDao) {
+    public UserDetailServiceImpl(UserDao userDao, UserRolesDao userRolesDao) {
         this.userDao = userDao;
         this.userRolesDao = userRolesDao;
     }
@@ -31,6 +31,7 @@ public class UserDetailService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userDao.findByName(username);
+        if (user == null) throw new UsernameNotFoundException(username);;
         return new org.springframework.security.core.userdetails
                 .User(user.getUsername(), user.getPassword(),
                 StreamSupport

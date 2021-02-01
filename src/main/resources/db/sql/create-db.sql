@@ -30,8 +30,8 @@ CREATE TABLE user_roles
 CREATE TABLE accounts
 (
     id         INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    first_name VARCHAR(30),
-    last_name  VARCHAR(30),
+    first_name VARCHAR(100),
+    last_name  VARCHAR(100),
     balance    FLOAT,
     user_id    INT UNIQUE,
 
@@ -40,11 +40,11 @@ CREATE TABLE accounts
 
 -- Insert users
 INSERT INTO users
-VALUES (null, 'admin', '123');
+VALUES (null, 'admin', '$2a$10$Xl/H1gV4/NdFWO7yl/GxVulQeITTN.lbG7MaOPPp9KzqMy2FfwlEK');
 INSERT INTO users
-VALUES (null, 'user', 'user');
+VALUES (null, 'user', '$2a$10$o/vo56LPaCUCtStfALL53OfwhncGY.JXCqfssLx0eqW5h9qpHd95.');
 INSERT INTO users
-VALUES (null, 'user2', 'user2');
+VALUES (null, 'user2', '$2a$10$pb6hq87G38DYEKynkOdFgOiNUUzdbC058A17dDsMMsE8AXEKyu3WK');
 
 -- Insert roles
 INSERT INTO roles
@@ -64,8 +64,8 @@ VALUES (null,3, 1);
 
 -- Insert account
 INSERT INTO accounts
-VALUES (null, 'super', 'class', 1000000.01, 1);
+VALUES (null, 'jdbc:h2:mem:admin', 'username:sa password: ', 1000000.01, 1);
 INSERT INTO accounts
-VALUES (null, 'v', 'vendetta', 1000000.01, 2);
+VALUES (null, 'пользователь', 'богатый', 50000.56, 2);
 INSERT INTO accounts
-VALUES (null, 'mac', 'os', 0, 3);
+VALUES (null, 'тестовый', 'без денег', 0, 3);

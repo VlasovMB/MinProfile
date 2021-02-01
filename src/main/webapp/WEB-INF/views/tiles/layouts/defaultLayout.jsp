@@ -26,7 +26,7 @@
 </section>
 
 
-<%--<script src='${contextPath}/static/js/bootstrap.js'></script>--%>
-<%--<script src='${contextPath}/static/js/ajaxJquery.js'></script>--%>
+<script src='${contextPath}/static/js/bootstrap.js'></script>
+<script src='${contextPath}/static/js/ajaxJquery.js'></script>
 </body>
 </html>

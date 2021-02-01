@@ -2,7 +2,7 @@ package ru.vlasovmb.minprofile.security.service;
 
 public interface SecurityService {
 
-    String findLoggedInUsername();
+    Boolean isAnonymousUser();
 
     String getCurrentUsername();
 

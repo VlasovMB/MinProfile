@@ -12,22 +12,19 @@ import org.tinylog.Logger;
 @Service
 public class SecurityServiceImpl implements SecurityService{
     private final AuthenticationManager authenticationManager;
-    private final UserDetailService userDetailService;
+    private final UserDetailServiceImpl userDetailServiceImpl;
 
     @Autowired
-    public SecurityServiceImpl(AuthenticationManager authenticationManager, UserDetailService userDetailService) {
+    public SecurityServiceImpl(AuthenticationManager authenticationManager, UserDetailServiceImpl userDetailServiceImpl) {
         this.authenticationManager = authenticationManager;
-        this.userDetailService = userDetailService;
+        this.userDetailServiceImpl = userDetailServiceImpl;
     }
 
 
     @Override
-    public String findLoggedInUsername() {
-        Object userDetails = SecurityContextHolder.getContext().getAuthentication().getDetails();
-        if (userDetails instanceof UserDetails){
-            return ((UserDetails)userDetails).getUsername();
-        }
-        return null;
+    public Boolean isAnonymousUser() {
+       return SecurityContextHolder.getContext().getAuthentication().getName().equalsIgnoreCase("anonymousUser");
+
     }
 
     @Override
@@ -37,7 +34,7 @@ public class SecurityServiceImpl implements SecurityService{
 
     @Override
     public void autoLogin(String username, String password) {
-        UserDetails userDetails = userDetailService.loadUserByUsername(username);
+        UserDetails userDetails = userDetailServiceImpl.loadUserByUsername(username);
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(userDetails,
                         password,

@@ -55,8 +55,7 @@ public class AccountDaoImpl implements AccountDao{
 
     @Override
     public UserAccount findByUsername(String username) {
-        if (username==null) return null;
-        System.out.println(username);
+        if (username==null || username.equalsIgnoreCase("anonymousUser")) return null;
         final String SQL_STRING = "SELECT * \n" +
                 "FROM accounts\n" +
                 "JOIN users ON user_id=users.id \n" +

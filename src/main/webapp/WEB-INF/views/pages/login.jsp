@@ -14,17 +14,18 @@
                 <h1 class="h3 mb-3 fw-normal">Вход в личный кабинет</h1>
             </div>
             <div class="card-body">
-                <div class="form-group ${error != null ? 'has-error' : ''}">
-
+                <div class="form-group ${error != null ? 'text-danger' : 'text-primary'}">
+                    <span>${message}</span>
                     <input name="username"
                            type="text"
                            placeholder="Логин"
-                           class="form-control mb-1">
+                           class="form-control mb-2 mt-2">
 
                     <input name="password"
                            type="password"
                            placeholder="Пароль"
-                           class="form-control mb-1">
+                           class="form-control mb-2">
+                    <span>${error}</span>
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 </div>
             </div>
@@ -34,6 +35,15 @@
         <a class="text-center" href="${contextPath}/registration">Зарегистрироваться</a>
 
     </form>
+</div>
+
+<div class="alert alert-warning alert-dismissible fade show w-25 m-auto" role="alert">
+    <p><strong>Стандарные пользователи:</strong></p>
+    <p><strong>admin </strong>admin</p>
+    <p><strong>user </strong>user</p>
+    <p><strong>user2 </strong>user2</p>
+
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 
 
