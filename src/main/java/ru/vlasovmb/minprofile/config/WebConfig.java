@@ -11,9 +11,9 @@ import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 import org.tinylog.Logger;
 
+@Configuration
 @EnableWebMvc
 @ComponentScan("ru.vlasovmb.minprofile")
-@Configuration
 public class WebConfig implements WebMvcConfigurer {
 
     /**
@@ -35,11 +35,11 @@ public class WebConfig implements WebMvcConfigurer {
     public void configureViewResolvers(ViewResolverRegistry registry) {
         TilesViewResolver viewResolver = new TilesViewResolver();
         registry.viewResolver(viewResolver);
-        Logger.info("Register TilesViewResolvers");
+        Logger.info("Registry TilesViewResolvers");
     }
 
     /**
-     * Configure ResourceHandlers to serve static resources like CSS/ Javascript etc...
+     * Configure ResourceHandlers to serve static resources like CSS/Javascript etc...
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

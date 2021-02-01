@@ -8,20 +8,20 @@
        template="/WEB-INF/views/tiles/layouts/defaultLayout.jsp">  
        <put-attribute name="title" value="" />  
        <put-attribute name="header" value="/WEB-INF/views/tiles/template/defaultHeader.jsp" />
-       <put-attribute name="body" value="" />  
+       <put-attribute name="body" value="/balance" />
        <put-attribute name="footer" value="/WEB-INF/views/tiles/template/defaultFooter.jsp" />  
    </definition>  
  
    <!-- Balance Page -->
    <definition name="balance" extends="base-definition">
-       <put-attribute name="title" value="" />
+       <put-attribute name="title" value="balance" />
        <put-attribute name="body" value="/WEB-INF/views/pages/balance.jsp" />
    </definition>  
 
-   <!-- Register Page -->
-   <definition name="register" extends="base-definition">
-       <put-attribute name="title" value="register" />
-       <put-attribute name="body" value="/WEB-INF/views/pages/register.jsp" />
+   <!-- Registration Page -->
+   <definition name="registration" extends="base-definition">
+       <put-attribute name="title" value="registration" />
+       <put-attribute name="body" value="/WEB-INF/views/pages/registration.jsp" />
    </definition>  
       
    <!-- Login Page -->
