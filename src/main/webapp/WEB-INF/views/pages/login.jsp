@@ -3,11 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <div class="form-user">
 
-    <form method="POST" action="${contextPath}/login">
+    <form method="POST" action="${pageContext.request.contextPath}/login">
 
         <div class="card text-dark bg-light mb-3 justify-content-center">
             <div class="card-header">
@@ -47,3 +46,16 @@
 </div>
 
 
+<c:forEach var="role"
+           items="${pageContext.request.userPrincipal.principal.authorities}">
+    <c:if test="${role.authority == 'role_anonymous' }">
+        <div class="alert alert-warning alert-dismissible fade show w-25 m-auto" role="alert">
+            <p><strong>Стандарные пользователи:</strong></p>
+            <p><strong>admin </strong>admin</p>
+            <p><strong>user </strong>user</p>
+            <p><strong>user2 </strong>user2</p>
+
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </c:if>
+</c:forEach>

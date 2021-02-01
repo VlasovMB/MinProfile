@@ -64,8 +64,8 @@ VALUES (null,3, 1);
 
 -- Insert account
 INSERT INTO accounts
-VALUES (null, 'jdbc:h2:mem:admin', 'username:sa password: ', 1000000.01, 1);
+VALUES (null, 'админ', '', 100000.01, 1);
 INSERT INTO accounts
-VALUES (null, 'пользователь', 'богатый', 50000.56, 2);
+VALUES (null, 'пользователь', '', 50000.56, 2);
 INSERT INTO accounts
-VALUES (null, 'тестовый', 'без денег', 0, 3);
+VALUES (null, 'Иванов', 'Петр', 0, 3);
