@@ -1,0 +1,17 @@
+ru/vlasovmb/minprofile/security/model/User.class
+ru/vlasovmb/minprofile/security/model/Role.class
+ru/vlasovmb/minprofile/config/WebConfig.class
+ru/vlasovmb/minprofile/security/model/Role$RoleBuilder.class
+ru/vlasovmb/minprofile/business/dao/AccountDaoImpl.class
+ru/vlasovmb/minprofile/controller/AppController.class
+ru/vlasovmb/minprofile/security/dao/UserDao.class
+ru/vlasovmb/minprofile/security/dao/RoleDaoImpl.class
+ru/vlasovmb/minprofile/security/model/User$UserBuilder.class
+ru/vlasovmb/minprofile/security/dao/UserDaoImpl.class
+ru/vlasovmb/minprofile/security/dao/RoleDao.class
+ru/vlasovmb/minprofile/business/service/AccountService.class
+ru/vlasovmb/minprofile/config/WebAppInit.class
+ru/vlasovmb/minprofile/business/dao/AccountDao.class
+ru/vlasovmb/minprofile/config/PersistenceConfig.class
+ru/vlasovmb/minprofile/security/validator/UserValidator.class
+ru/vlasovmb/minprofile/business/model/UserAccount.class
