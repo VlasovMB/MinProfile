@@ -11056,9 +11056,11 @@ textarea.form-control-lg {
     padding: 15px;
     margin: auto;
 }
+
 .form-user .checkbox {
     font-weight: 400;
 }
+
 .form-user .form-control {
     position: relative;
     box-sizing: border-box;
@@ -11066,20 +11068,22 @@ textarea.form-control-lg {
     padding: 10px;
     font-size: 16px;
 }
+
 .form-user .form-control:focus {
     z-index: 2;
 }
+
 .form-user input[type="email"] {
     margin-bottom: -1px;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
 }
+
 .form-user input[type="password"] {
     margin-bottom: 10px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
-
 
 
 /*# sourceMappingURL=bootstrap.min.css.map */

@@ -4,12 +4,17 @@ import org.springframework.jdbc.core.RowMapper;
 import ru.vlasovmb.minprofile.business.model.UserAccount;
 
 public class UtilDao {
+
     public static final String TABLE_NAME_USER_ACCOUNT = "accounts";
 
+    private UtilDao() {
+        throw new IllegalStateException("Utility class");
+    }
 
-    public static RowMapper<UserAccount> getUserAccountRowMapper(){
+    public static RowMapper<UserAccount> getUserAccountRowMapper() {
         return (resultSet, i) ->
-                UserAccount.builder()
+                UserAccount
+                        .builder()
                         .id(resultSet.getLong("id"))
                         .firstName(resultSet.getString("first_name"))
                         .lastName(resultSet.getString("last_name"))
@@ -17,5 +22,4 @@ public class UtilDao {
                         .userId(resultSet.getLong("user_id"))
                         .build();
     }
-
 }

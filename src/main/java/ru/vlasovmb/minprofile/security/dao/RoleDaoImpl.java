@@ -19,14 +19,16 @@ import static ru.vlasovmb.minprofile.security.dao.util.UtilDaoSecurity.getRoleRo
 @Repository
 public class RoleDaoImpl implements RoleDao {
 
-
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     private SimpleJdbcInsert simpleInsert;
 
     @Autowired
     public void setDataSource(final DataSource dataSource) {
         namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
-        simpleInsert = new SimpleJdbcInsert(dataSource).withTableName(TABLE_NAME_ROLES).usingGeneratedKeyColumns("id");
+        simpleInsert =
+                new SimpleJdbcInsert(dataSource)
+                        .withTableName(TABLE_NAME_ROLES)
+                        .usingGeneratedKeyColumns("id");
     }
 
     @Override
@@ -40,24 +42,38 @@ public class RoleDaoImpl implements RoleDao {
 
     @Override
     public Optional<Role> findById(Long roleId) {
-        final SqlParameterSource namedParameters = new MapSqlParameterSource().addValue("id", roleId);
-        return Optional.ofNullable(namedParameterJdbcTemplate
-                .queryForObject("SELECT * FROM "+TABLE_NAME_ROLES+" WHERE id = :id", namedParameters, getRoleRowMapper()));
+        final SqlParameterSource namedParameters = new MapSqlParameterSource()
+                .addValue("id", roleId);
+        return Optional.ofNullable(
+                namedParameterJdbcTemplate.queryForObject(
+                        "SELECT * FROM " + TABLE_NAME_ROLES + " WHERE id = :id",
+                        namedParameters,
+                        getRoleRowMapper()
+                )
+        );
     }
 
     @Override
     public Optional<Role> findByName(String roleName) {
-        final SqlParameterSource namedParameters = new MapSqlParameterSource().addValue("name", roleName.toLowerCase());
-        return Optional.ofNullable(namedParameterJdbcTemplate
-                .queryForObject("SELECT * FROM "+TABLE_NAME_ROLES+" WHERE name = :name", namedParameters, getRoleRowMapper()));
+        final SqlParameterSource namedParameters = new MapSqlParameterSource()
+                .addValue("name", roleName.toLowerCase());
+        return Optional.ofNullable(
+                namedParameterJdbcTemplate.queryForObject(
+                        "SELECT * FROM " + TABLE_NAME_ROLES + " WHERE name = :name",
+                        namedParameters,
+                        getRoleRowMapper()
+                )
+        );
     }
 
     @Override
     public boolean existsById(Long roleId) {
-        final SqlParameterSource namedParameters = new MapSqlParameterSource().addValue("id", roleId);
-        return namedParameterJdbcTemplate
-                .queryForObject("SELECT EXISTS(SELECT id FROM "+TABLE_NAME_ROLES+" WHERE id = :id)", namedParameters, Boolean.class);
-
+        final SqlParameterSource namedParameters = new MapSqlParameterSource()
+                .addValue("id", roleId);
+        return namedParameterJdbcTemplate.queryForObject(
+                "SELECT EXISTS(SELECT id FROM " + TABLE_NAME_ROLES + " WHERE id = :id)",
+                namedParameters,
+                Boolean.class
+        );
     }
-
 }

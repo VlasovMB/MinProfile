@@ -11,26 +11,7 @@ import ru.vlasovmb.minprofile.business.model.UserAccount;
 @AllArgsConstructor
 @Builder
 public class UserForm {
+
     User user;
     UserAccount userAccount;
-
-    public UserForm(String username,
-                    String password,
-                    String passwordConfirm,
-                    String firstName,
-                    String lastName) {
-        this.user =
-                User.builder()
-                        .username(username)
-                        .password(password)
-                        .passwordConfirm(passwordConfirm)
-                        .build();
-        this.userAccount =
-                UserAccount.builder()
-                        .firstName(firstName)
-                        .lastName(lastName)
-                        .build();
-    }
-
-
 }

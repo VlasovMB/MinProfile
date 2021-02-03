@@ -9,16 +9,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-
 public class User {
+
     private Long id;
     private String username;
     private String password;
-    transient private String passwordConfirm;
-
-
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
+    private transient String passwordConfirm;
 }

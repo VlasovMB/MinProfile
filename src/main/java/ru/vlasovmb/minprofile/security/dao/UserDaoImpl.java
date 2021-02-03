@@ -20,14 +20,16 @@ import static ru.vlasovmb.minprofile.security.dao.util.UtilDaoSecurity.getUserRo
 @Repository
 public class UserDaoImpl implements UserDao {
 
-
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     private SimpleJdbcInsert simpleInsert;
 
     @Autowired
     public void setDataSource(final DataSource dataSource) {
         namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
-        simpleInsert = new SimpleJdbcInsert(dataSource).withTableName(TABLE_NAME_USERS).usingGeneratedKeyColumns("id");
+        simpleInsert =
+                new SimpleJdbcInsert(dataSource)
+                        .withTableName(TABLE_NAME_USERS)
+                        .usingGeneratedKeyColumns("id");
     }
 
     @Override
@@ -35,50 +37,56 @@ public class UserDaoImpl implements UserDao {
         final Map<String, Object> parameters = new HashMap<>(2);
         parameters.put("username", user.getUsername().toLowerCase());
         parameters.put("password", user.getPassword());
-        try{
+        try {
             Number newId = simpleInsert.executeAndReturnKey(parameters);
             user.setId(newId.longValue());
             return user;
-        } catch (InvalidDataAccessApiUsageException invalidDataAccessApiUsageException){
+        } catch (
+                InvalidDataAccessApiUsageException invalidDataAccessApiUsageException
+        ) {
             return user;
         }
-
-
     }
 
     @Override
     public Optional<User> findById(Long userId) {
-        final SqlParameterSource namedParameters = new MapSqlParameterSource().addValue("id", userId);
-        return Optional.ofNullable(namedParameterJdbcTemplate
-                .queryForObject(
+        final SqlParameterSource namedParameters = new MapSqlParameterSource()
+                .addValue("id", userId);
+        return Optional.ofNullable(
+                namedParameterJdbcTemplate.queryForObject(
                         "SELECT * FROM " + TABLE_NAME_USERS + " WHERE id = :id",
-                        namedParameters, getUserRowMapper()));
+                        namedParameters,
+                        getUserRowMapper()
+                )
+        );
     }
 
     @Override
     public User findByName(String username) {
-        final SqlParameterSource namedParameters = new MapSqlParameterSource().addValue("username", username.toLowerCase());
+        final SqlParameterSource namedParameters = new MapSqlParameterSource()
+                .addValue("username", username.toLowerCase());
         User user;
         try {
-            user = namedParameterJdbcTemplate
-                    .queryForObject(
+            user =
+                    namedParameterJdbcTemplate.queryForObject(
                             "SELECT * FROM " + TABLE_NAME_USERS + " WHERE username = :username",
                             namedParameters,
-                            getUserRowMapper());
-        } catch (Exception ignored){
+                            getUserRowMapper()
+                    );
+        } catch (Exception ignored) {
             return null;
         }
         return user;
     }
 
-
     @Override
     public boolean existsById(Long userId) {
-        final SqlParameterSource namedParameters = new MapSqlParameterSource().addValue("id", userId);
-        return namedParameterJdbcTemplate
-                .queryForObject("SELECT EXISTS(SELECT id FROM " + TABLE_NAME_USERS + " WHERE id = :id)", namedParameters, Boolean.class);
+        final SqlParameterSource namedParameters = new MapSqlParameterSource()
+                .addValue("id", userId);
+        return namedParameterJdbcTemplate.queryForObject(
+                "SELECT EXISTS(SELECT id FROM " + TABLE_NAME_USERS + " WHERE id = :id)",
+                namedParameters,
+                Boolean.class
+        );
     }
-
-
-
 }

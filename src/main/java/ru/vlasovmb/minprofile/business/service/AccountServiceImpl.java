@@ -6,7 +6,7 @@ import ru.vlasovmb.minprofile.business.dao.AccountDao;
 import ru.vlasovmb.minprofile.business.model.UserAccount;
 
 @Service
-public class AccountServiceImpl implements AccountService{
+public class AccountServiceImpl implements AccountService {
 
     private final AccountDao accountDao;
 
@@ -17,8 +17,7 @@ public class AccountServiceImpl implements AccountService{
 
     @Override
     public UserAccount save(UserAccount userAccount) {
-       return accountDao.save(userAccount);
-
+        return accountDao.save(userAccount);
     }
 
     @Override

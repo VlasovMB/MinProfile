@@ -18,7 +18,6 @@ public class UserValidator implements Validator {
         this.userService = userService;
     }
 
-
     @Override
     public boolean supports(Class<?> aClass) {
         return User.class.equals(aClass);
@@ -28,27 +27,34 @@ public class UserValidator implements Validator {
     public void validate(Object o, Errors errors) {
         User user = (User) o;
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "user.username", "Required");
+        ValidationUtils.rejectIfEmptyOrWhitespace(
+                errors,
+                "user.username",
+                "Required"
+        );
 
-
-        if (user.getUsername().length() < 3 || user.getUsername().length() > 30){
+        if (user.getUsername().length() < 3 || user.getUsername().length() > 30) {
             errors.rejectValue("user.username", "Size.userForm.user.username");
         }
 
-        if (userService.findByUsername(user.getUsername()) != null){
+        if (userService.findByUsername(user.getUsername()) != null) {
             errors.rejectValue("user.username", "Duplicate.userForm.user.username");
         }
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "user.password", "Required");
+        ValidationUtils.rejectIfEmptyOrWhitespace(
+                errors,
+                "user.password",
+                "Required"
+        );
         if (user.getPassword().length() < 3 || user.getPassword().length() > 30) {
             errors.rejectValue("user.password", "Size.userForm.user.password");
         }
 
         if (!user.getPasswordConfirm().equals(user.getPassword())) {
-            errors.rejectValue("user.passwordConfirm", "Different.userForm.user.password");
+            errors.rejectValue(
+                    "user.passwordConfirm",
+                    "Different.userForm.user.password"
+            );
         }
-
-
-
     }
 }

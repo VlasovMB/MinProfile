@@ -14,7 +14,6 @@ import ru.vlasovmb.minprofile.security.model.User;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-
 @Service
 public class UserDetailServiceImpl implements UserDetailsService {
 
@@ -29,15 +28,20 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
     @Transactional(readOnly = true)
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username)
+            throws UsernameNotFoundException {
         User user = userDao.findByName(username);
-        if (user == null) throw new UsernameNotFoundException(username);;
-        return new org.springframework.security.core.userdetails
-                .User(user.getUsername(), user.getPassword(),
-                StreamSupport
-                        .stream(userRolesDao.getUserRoles(user).spliterator(), false)
-                        .map(role -> new SimpleGrantedAuthority(role.getName()))
-                        .collect(Collectors.toSet()))
-                ;
+        if (user == null) {
+            throw new UsernameNotFoundException(username);
+        } else {
+            return new org.springframework.security.core.userdetails.User(
+                    user.getUsername(),
+                    user.getPassword(),
+                    StreamSupport
+                            .stream(userRolesDao.getUserRoles(user).spliterator(), false)
+                            .map(role -> new SimpleGrantedAuthority(role.getName()))
+                            .collect(Collectors.toSet())
+            );
+        }
     }
 }

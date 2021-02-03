@@ -1,6 +1,5 @@
 package ru.vlasovmb.minprofile.security.config;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,12 +10,12 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
+import org.springframework.security.web.csrf.CsrfFilter;
+import org.springframework.web.filter.CharacterEncodingFilter;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
 
     private final UserDetailsService userDetailsService;
 
@@ -27,8 +26,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        CharacterEncodingFilter filter = new CharacterEncodingFilter();
+        filter.setEncoding("UTF-8");
+        filter.setForceEncoding(true);
+        http.addFilterBefore(filter, CsrfFilter.class);
 
-        http.csrf()
+        http
+                .csrf()
                 .disable()
                 .formLogin()
                 .loginPage("/login")
@@ -40,19 +44,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutSuccessUrl("/login?logout");
 
-        http.exceptionHandling().accessDeniedPage("/error403").and()
+        http
+                .exceptionHandling()
+                .accessDeniedPage("/error403")
+                .and()
                 .authorizeRequests()
-                .antMatchers("/balance").authenticated()
-                .antMatchers("/console/**").hasAuthority("role_admin")
-                .anyRequest().permitAll();
+                .antMatchers("/balance")
+                .authenticated()
+                .antMatchers("/console/**")
+                .hasAuthority("role_admin")
+                .anyRequest()
+                .permitAll();
 
         /**
          * for H2sql access
          */
         http.headers().frameOptions().disable();
-
     }
-
 
     @Bean
     @Override
@@ -68,7 +76,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-
     @Bean
     public DaoAuthenticationProvider authProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
@@ -76,7 +83,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }
-
-
-
 }

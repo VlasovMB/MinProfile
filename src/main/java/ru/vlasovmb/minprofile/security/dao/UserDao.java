@@ -5,7 +5,6 @@ import ru.vlasovmb.minprofile.security.model.User;
 import java.util.Optional;
 
 public interface UserDao {
-
     User save(User user);
 
     Optional<User> findById(Long userId);
@@ -13,6 +12,4 @@ public interface UserDao {
     User findByName(String username);
 
     boolean existsById(Long userId);
-
-
 }

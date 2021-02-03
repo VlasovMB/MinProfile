@@ -17,12 +17,13 @@ public class UserServiceImpl implements UserService {
     private final RoleDao roleDao;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-
     @Autowired
-    public UserServiceImpl(UserDao userDao,
-                           UserRolesDao userRolesDao,
-                           RoleDao roleDao,
-                           BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public UserServiceImpl(
+            UserDao userDao,
+            UserRolesDao userRolesDao,
+            RoleDao roleDao,
+            BCryptPasswordEncoder bCryptPasswordEncoder
+    ) {
         this.userDao = userDao;
         this.userRolesDao = userRolesDao;
         this.roleDao = roleDao;
@@ -32,12 +33,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public User save(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        Role userRole =
-                roleDao.findByName("role_user".toLowerCase())
-                .orElseGet(()->
-                        roleDao.save(Role.builder()
-                                .name("role_user".toLowerCase())
-                                .build()));
+        Role userRole = roleDao
+                .findByName("role_user".toLowerCase())
+                .orElseGet(
+                        () ->
+                                roleDao.save(Role.builder().name("role_user".toLowerCase()).build())
+                );
         User newUser = userDao.save(user);
         userRolesDao.addUserRole(newUser, userRole);
         return newUser;

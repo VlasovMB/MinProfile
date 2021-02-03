@@ -9,12 +9,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
 public class UserAccount {
+
     private Long id;
     private String firstName;
     private String lastName;
     private Double balance;
     private Long userId;
-
 }

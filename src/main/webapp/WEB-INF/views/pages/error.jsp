@@ -10,8 +10,8 @@
 
         </div>
         <div class="card-body">
-                <a class="w-100 btn btn-lg btn-success btn-block"
-                   href="${pageContext.request.contextPath}/login">Домой</a>
+            <a class="w-100 btn btn-lg btn-success btn-block"
+               href="${pageContext.request.contextPath}/login">Домой</a>
         </div>
     </div>
 </div>

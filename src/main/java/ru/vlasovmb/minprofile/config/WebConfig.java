@@ -20,7 +20,7 @@ public class WebConfig implements WebMvcConfigurer {
      * Configure TilesConfigurer.
      */
     @Bean
-    public TilesConfigurer tilesConfigurer(){
+    public TilesConfigurer tilesConfigurer() {
         TilesConfigurer tilesConfigurer = new TilesConfigurer();
         tilesConfigurer.setDefinitions("/WEB-INF/views/**/tiles.xml");
         tilesConfigurer.setCheckRefresh(true);
@@ -46,5 +46,4 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/static/**").addResourceLocations("/static/");
         Logger.info("add resource /static");
     }
-
 }
