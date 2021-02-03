@@ -4,9 +4,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 
-
-
-
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 border-bottom shadow-sm bg-dark text-white">
     <a class="h5 my-0 me-md-auto fw-normal btn btn-outline-light">
         <c:if test="${pageContext.request.userPrincipal.name != null}">${pageContext.request.userPrincipal.name}</c:if>

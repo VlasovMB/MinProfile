@@ -1,38 +1,39 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE tiles-definitions PUBLIC  "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"  "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">  
+<!DOCTYPE tiles-definitions PUBLIC  "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
-<tiles-definitions>  
- 
-   <!-- Base Definition -->
-   <definition name="base-definition" 
-       template="/WEB-INF/views/tiles/layouts/defaultLayout.jsp">  
-       <put-attribute name="title" value="" />  
-       <put-attribute name="header" value="/WEB-INF/views/tiles/template/defaultHeader.jsp" />
-       <put-attribute name="body" value="/balance" />
-       <put-attribute name="footer" value="/WEB-INF/views/tiles/template/defaultFooter.jsp" />  
-   </definition>  
- 
-   <!-- Balance Page -->
-   <definition name="balance" extends="base-definition">
-       <put-attribute name="title" value="balance" />
-       <put-attribute name="body" value="/WEB-INF/views/pages/balance.jsp" />
-   </definition>  
+<tiles-definitions>
 
-   <!-- Registration Page -->
-   <definition name="registration" extends="base-definition">
-       <put-attribute name="title" value="registration" />
-       <put-attribute name="body" value="/WEB-INF/views/pages/registration.jsp" />
-   </definition>  
-      
-   <!-- Login Page -->
-   <definition name="login" extends="base-definition">
-       <put-attribute name="title" value="login" />
-       <put-attribute name="body" value="/WEB-INF/views/pages/login.jsp" />
-   </definition>
+    <!-- Base Definition -->
+    <definition name="base-definition"
+                template="/WEB-INF/views/tiles/layouts/defaultLayout.jsp">
+        <put-attribute name="title" value=""/>
+        <put-attribute name="header" value="/WEB-INF/views/tiles/template/defaultHeader.jsp"/>
+        <put-attribute name="body" value="/balance"/>
+        <put-attribute name="footer" value="/WEB-INF/views/tiles/template/defaultFooter.jsp"/>
+    </definition>
+
+    <!-- Balance Page -->
+    <definition name="balance" extends="base-definition">
+        <put-attribute name="title" value="balance"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/balance.jsp"/>
+    </definition>
+
+    <!-- Registration Page -->
+    <definition name="registration" extends="base-definition">
+        <put-attribute name="title" value="registration"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/registration.jsp"/>
+    </definition>
+
+    <!-- Login Page -->
+    <definition name="login" extends="base-definition">
+        <put-attribute name="title" value="login"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/login.jsp"/>
+    </definition>
 
     <definition name="error403" extends="base-definition">
-        <put-attribute name="title" value="error403" />
-        <put-attribute name="body" value="/WEB-INF/views/pages/error.jsp" />
+        <put-attribute name="title" value="error403"/>
+        <put-attribute name="body" value="/WEB-INF/views/pages/error.jsp"/>
     </definition>
 
 </tiles-definitions>

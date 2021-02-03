@@ -17,7 +17,6 @@
 </div>
 
 
-
 <c:forEach var="role"
            items="${pageContext.request.userPrincipal.principal.authorities}">
     <c:if test="${role.authority == 'role_admin' }">
